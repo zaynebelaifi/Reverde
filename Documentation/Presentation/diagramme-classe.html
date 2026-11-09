@@ -1,39 +1,74 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Overall UML class diagram | ReVerde</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class diagram — ReVerde</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,700&display=swap">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header><div class="wrap">
-    <a class="brand" href="index.html">ReVerde</a>
-    <nav aria-label="Documentation">
-      <a href="index.html">Overview</a>
-      <a href="architecture-microservices.html">Architecture</a>
-      <a href="diagramme-classe.html" aria-current="page">Class diagram</a>
-      <a href="diagramme-classe-domaine.html">Classes by service</a>
+<div class="band"><span></span><span></span></div>
+<header>
+    <nav>
+        <a class="logo" href="indexDoc.html">ReVerde · Documentation<small>AWD module — microservices architecture</small></a>
+        <button class="burger" type="button" aria-label="Open the menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        <ul class="nav-links">
+            <li><a href="architecture-microservices.html">Architecture</a></li>
+            <li><a href="diagramme-classe.html" aria-current="page">Class diagram</a></li>
+            <li><a href="diagramme-classe-domaine.html">Classes per domain</a></li>
+            <li><a href="communication-synchrone.html">Synchronous communication</a></li>
+            <li><a href="async-communication.html">Asynchronous communication</a></li>
+            <li><a href="keycloak-principe.html">JWT security</a></li>
+        </ul>
     </nav>
-  </div></header>
-  <main class="wrap">
-    <div class="kicker">AWD Final Project · Session 4</div>
-    <h1>Overall UML class diagram</h1>
-    <p class="lead">This conceptual model connects the main entities in ReVerde, from forest biodiversity and weather records to fire incidents, recovery projects, and field operations.</p>
-    <figure>
-      <a href="../Diagrams/2-diagramme-classe.png"><img src="../Diagrams/2-diagramme-classe.png" alt="Overall UML class diagram for ReVerde. The reading notes below explain the key relationships."></a>
-      <figcaption><a href="../Diagrams/2-diagramme-classe.png">Open full-size PNG</a> · <a href="../Diagrams/reverde.drawio" download>Download editable Draw.io file</a></figcaption>
-    </figure>
-    <section class="notes">
-      <h2>Reading the diagram</h2>
-      <ul>
-        <li><strong>Forest biodiversity.</strong> <code>ForestSpecies</code> connects forest zones to plant and wildlife species. <code>BiodiversityObservation</code> records observations of a species in a zone.</li>
-        <li><strong>Risk and incidents.</strong> Weather records support risk assessments. A fire incident references its forest zone and can have damage assessments.</li>
-        <li><strong>Recovery.</strong> A recovery project can reference a fire incident and contain planting records. Activities and equipment allocations can support a project.</li>
-        <li><strong>Multiplicity.</strong> The labels show the proposed rules for Session 4. For example, <code>0..*</code> means zero or more associated records.</li>
-      </ul>
-    </section>
-  </main>
-  <footer><div class="wrap">ReVerde · Forest protection and recovery in Tunisia</div></footer>
+</header>
+
+<main>
+
+    <h1>Class diagram</h1>
+    <p class="lead">The conceptual model of the whole ReVerde domain. Each colour identifies the service that will own the class. The field types and multiplicities are proposed for Session 4.</p>
+    <div class="diagram" data-page="1">
+        <img class="fallback" src="img/2-diagramme-classe.png" alt="Class diagram">
+    </div>
+    <div class="tools">
+        <a href="img/2-diagramme-classe.png" target="_blank">PNG image</a>
+        <a href="microservices.drawio" download>Download the draw.io file</a>
+    </div>
+    <p class="help">Diagram toolbar: zoom, change page, full screen. The pencil opens an editable copy in
+    diagrams.net. Without an Internet connection, the PNG image is shown instead.</p>
+
+    <h2>Reading the diagram</h2>
+    <div class="two-columns">
+        <div class="block"><h3>Associations</h3><div><ul>
+            <li>A forest zone has weather records and fire incidents.</li>
+            <li><code>ForestSpecies</code> joins forest zones and species. Observations refer to both.</li>
+            <li>Fire incidents can have damage assessments and lead to recovery projects.</li>
+            <li>Volunteer registrations associate volunteers with activities. Equipment allocations can support recovery projects.</li>
+        </ul></div></div>
+        <div class="block green"><h3>Business rules</h3><div><ul>
+            <li>Incidents start as <code>REPORTED</code>, may become <code>VERIFIED</code>, and are eventually <code>CLOSED</code>.</li>
+            <li>Weather data drives risk assessments using configurable thresholds.</li>
+            <li>Recovery projects record planting objectives and progress.</li>
+            <li>The multiplicities are the proposed Session 4 model.</li>
+        </ul></div></div>
+    </div>
+        <div class="block"><h3>Enumerations</h3><div><ul>
+            <li><code>IncidentStatus</code>: <code>REPORTED</code>, <code>VERIFIED</code>, <code>CLOSED</code>.</li>
+            <li><code>RiskLevel</code>: <code>LOW</code>, <code>MODERATE</code>, <code>HIGH</code>, <code>VERY_HIGH</code>.</li>
+        </ul></div></div>
+
+    <div class="pagination"><a href="architecture-microservices.html">← Microservices architecture</a><a href="diagramme-classe-domaine.html">Class diagram per domain →</a></div>
+</main>
+
+<footer>
+    <div>ReVerde project team</div>
+    <div>ReVerde application documentation — AWD module</div>
+    <div>2026–2027</div>
+</footer>
+
+<script src="diagrams.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

@@ -1,39 +1,83 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>UML class diagram by service | ReVerde</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class diagram per domain — ReVerde</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,700&display=swap">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header><div class="wrap">
-    <a class="brand" href="index.html">ReVerde</a>
-    <nav aria-label="Documentation">
-      <a href="index.html">Overview</a>
-      <a href="architecture-microservices.html">Architecture</a>
-      <a href="diagramme-classe.html">Class diagram</a>
-      <a href="diagramme-classe-domaine.html" aria-current="page">Classes by service</a>
+<div class="band"><span></span><span></span></div>
+<header>
+    <nav>
+        <a class="logo" href="indexDoc.html">ReVerde · Documentation<small>AWD module — microservices architecture</small></a>
+        <button class="burger" type="button" aria-label="Open the menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        <ul class="nav-links">
+            <li><a href="architecture-microservices.html">Architecture</a></li>
+            <li><a href="diagramme-classe.html">Class diagram</a></li>
+            <li><a href="diagramme-classe-domaine.html" aria-current="page">Classes per domain</a></li>
+            <li><a href="communication-synchrone.html">Synchronous communication</a></li>
+            <li><a href="async-communication.html">Asynchronous communication</a></li>
+            <li><a href="keycloak-principe.html">JWT security</a></li>
+        </ul>
     </nav>
-  </div></header>
-  <main class="wrap">
-    <div class="kicker">AWD Final Project · Session 4</div>
-    <h1>UML class diagram by service</h1>
-    <p class="lead">This view groups the classes by service ownership and shows sample fields. The dashed arrows show proposed references between services.</p>
-    <figure>
-      <a href="../Diagrams/3-diagramme-classe-domaine.png"><img src="../Diagrams/3-diagramme-classe-domaine.png" alt="UML class diagram by service for ReVerde. The reading notes below explain the key relationships."></a>
-      <figcaption><a href="../Diagrams/3-diagramme-classe-domaine.png">Open full-size PNG</a> · <a href="../Diagrams/reverde.drawio" download>Download editable Draw.io file</a></figcaption>
-    </figure>
-    <section class="notes">
-      <h2>Reading the diagram</h2>
-      <ul>
-        <li><strong>Forest and risk.</strong> The forest service owns <code>ForestZone</code>. The risk service can store <code>forestZoneId</code> on weather records.</li>
-        <li><strong>Incidents and recovery.</strong> The incident service owns <code>FireIncident</code> and <code>DamageAssessment</code>. The recovery service can use <code>incidentId</code> to link a project to a reported fire.</li>
-        <li><strong>Volunteers and equipment.</strong> Volunteer activities and resource allocations can reference a recovery project by ID.</li>
-        <li><strong>Service boundaries.</strong> Cross-service IDs refer to records managed by another service. Each service owns and maintains its local database relationships.</li>
-      </ul>
-    </section>
-  </main>
-  <footer><div class="wrap">ReVerde · Forest protection and recovery in Tunisia</div></footer>
+</header>
+
+<main>
+
+    <h1>Class diagram per domain</h1>
+    <p class="lead">The same model split into bounded contexts: <b>one context = one microservice = one database</b>. Cross-service references are stored as IDs and resolved through the owning service.</p>
+    <div class="diagram" data-page="2">
+        <img class="fallback" src="img/3-diagramme-classe-domaine.png" alt="Class diagram per domain">
+    </div>
+    <div class="tools">
+        <a href="img/3-diagramme-classe-domaine.png" target="_blank">PNG image</a>
+        <a href="microservices.drawio" download>Download the draw.io file</a>
+    </div>
+    <p class="help">Diagram toolbar: zoom, change page, full screen. The pencil opens an editable copy in
+    diagrams.net. Without an Internet connection, the PNG image is shown instead.</p>
+
+    <h2>Between two domains</h2>
+    <div class="table-wrap">
+    <table>
+        <thead><tr><th>From</th><th>Reference</th><th>Owner</th></tr></thead>
+        <tbody>
+        <tr><td>Weather record</td><td><code>forestZoneId</code></td><td>Forest &amp; biodiversity</td></tr>
+        <tr><td>Fire incident</td><td><code>forestZoneId</code></td><td>Forest &amp; biodiversity</td></tr>
+        <tr><td>Recovery project</td><td><code>incidentId</code></td><td>Fire incidents</td></tr>
+        <tr><td>Volunteer activity</td><td><code>recoveryProjectId</code></td><td>Reforestation &amp; recovery</td></tr>
+        <tr><td>Resource allocation</td><td><code>recoveryProjectId</code></td><td>Reforestation &amp; recovery</td></tr>
+        </tbody>
+    </table>
+    </div>
+    <div class="two-columns">
+        <div class="block"><h3>Cross-service IDs</h3><div><ul>
+            <li>The incident service stores <code>forestZoneId</code> and can query the forest service for zone details.</li>
+            <li>The recovery service owns the link from a recovery project to an incident.</li>
+            <li>Cross-service IDs do not create foreign keys between service databases.</li>
+        </ul></div></div>
+        <div class="block green"><h3>Microservice numbering</h3><div><ul>
+            <li>MS1 · forest-biodiversity-service</li>
+            <li>MS2 · fire-risk-service</li>
+            <li>MS3 · incident-service</li>
+            <li>MS4 · recovery-service</li>
+            <li>MS5 · volunteer-service</li>
+            <li>MS6 · resource-service</li>
+        </ul></div></div>
+    </div>
+
+    <div class="pagination"><a href="diagramme-classe.html">← Class diagram</a><a href="communication-synchrone.html">Synchronous communication (REST) →</a></div>
+</main>
+
+<footer>
+    <div>ReVerde project team</div>
+    <div>ReVerde application documentation — AWD module</div>
+    <div>2026–2027</div>
+</footer>
+
+<script src="diagrams.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

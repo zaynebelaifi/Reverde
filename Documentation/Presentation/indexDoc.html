@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home — ReVerde</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,700&display=swap">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="band"><span></span><span></span></div>
+<header>
+    <nav>
+        <a class="logo" href="indexDoc.html">ReVerde · Documentation<small>AWD module — microservices architecture</small></a>
+        <button class="burger" type="button" aria-label="Open the menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        <ul class="nav-links">
+            <li><a href="architecture-microservices.html">Architecture</a></li>
+            <li><a href="diagramme-classe.html">Class diagram</a></li>
+            <li><a href="diagramme-classe-domaine.html">Classes per domain</a></li>
+            <li><a href="communication-synchrone.html">Synchronous communication</a></li>
+            <li><a href="async-communication.html">Asynchronous communication</a></li>
+            <li><a href="keycloak-principe.html">JWT security</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+
+    <h1>ReVerde application documentation</h1>
+    <p class="lead">Entry point to the diagrams that document ReVerde, a microservices platform for forest protection and post-fire recovery in Tunisia, designed for the Distributed Web Applications module.</p>
+
+    <div class="cards">
+        <a class="card" href="architecture-microservices.html">
+            <img src="img/1-architecture-microservices.png" alt="Preview: Microservices architecture" loading="lazy">
+            <div class="card-body"><h3><span class="num">1</span>Microservices architecture</h3>
+            <p>The six microservices, the gateway, Eureka, Config Server, RabbitMQ and Docker.</p></div>
+        </a>
+        <a class="card" href="diagramme-classe.html">
+            <img src="img/2-diagramme-classe.png" alt="Preview: Class diagram" loading="lazy">
+            <div class="card-body"><h3><span class="num">2</span>Class diagram</h3>
+            <p>The conceptual model of the whole ReVerde domain, coloured by microservice.</p></div>
+        </a>
+        <a class="card" href="diagramme-classe-domaine.html">
+            <img src="img/3-diagramme-classe-domaine.png" alt="Preview: Class diagram per domain" loading="lazy">
+            <div class="card-body"><h3><span class="num">3</span>Class diagram per domain</h3>
+            <p>One bounded context per microservice, with local associations and cross-service references by ID.</p></div>
+        </a>
+        <a class="card" href="communication-synchrone.html">
+            <img src="img/4-communication-synchrone.png" alt="Preview: Synchronous communication (REST)" loading="lazy">
+            <div class="card-body"><h3><span class="num">4</span>Synchronous communication (REST)</h3>
+            <p>Fire report sequence from the gateway through the incident service and forest zone lookup.</p></div>
+        </a>
+        <a class="card" href="async-communication.html">
+            <img src="img/5-communication-asynchrone.png" alt="Preview: Asynchronous communication (RabbitMQ)" loading="lazy">
+            <div class="card-body"><h3><span class="num">5</span>Asynchronous communication (RabbitMQ)</h3>
+            <p>Proposed IncidentVerified event and recovery consumer.</p></div>
+        </a>
+        <a class="card" href="keycloak-principe.html">
+            <img src="img/6-keycloak.png" alt="Preview: How JWT security works" loading="lazy">
+            <div class="card-body"><h3><span class="num">6</span>How JWT security works</h3>
+            <p>Sign-in, bearer JWT and gateway validation.</p></div>
+        </a>
+    </div>
+
+    <h2>Files</h2>
+    <ul>
+        <li><a href="microservices.drawio" download>microservices.drawio</a>: the single source of the six diagrams
+            (open it in <a href="https://app.diagrams.net" target="_blank">diagrams.net</a> or draw.io Desktop).</li>
+        <li><a href="ReVerde_Session4_Presentation.pptx">Session 4 PowerPoint</a>.</li>
+        <li><code>img/</code> folder: one PNG image per diagram, for your reports and presentations.</li>
+    </ul>
+
+    <div class="block green"><h3>The running scenario</h3><div>
+        A user reports a fire in a forest zone. The incident service records the report, and a verified incident can inform a recovery project.
+    </div></div>
+
+</main>
+
+<footer>
+    <div>ReVerde project team</div>
+    <div>ReVerde application documentation — AWD module</div>
+    <div>2026–2027</div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

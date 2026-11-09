@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How JWT security works — ReVerde</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,700&display=swap">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="band"><span></span><span></span></div>
+<header>
+    <nav>
+        <a class="logo" href="indexDoc.html">ReVerde · Documentation<small>AWD module — microservices architecture</small></a>
+        <button class="burger" type="button" aria-label="Open the menu" aria-expanded="false"><span></span><span></span><span></span></button>
+        <ul class="nav-links">
+            <li><a href="architecture-microservices.html">Architecture</a></li>
+            <li><a href="diagramme-classe.html">Class diagram</a></li>
+            <li><a href="diagramme-classe-domaine.html">Classes per domain</a></li>
+            <li><a href="communication-synchrone.html">Synchronous communication</a></li>
+            <li><a href="async-communication.html">Asynchronous communication</a></li>
+            <li><a href="keycloak-principe.html" aria-current="page">JWT security</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+
+    <h1>How JWT security works</h1>
+    <p class="lead">Proposed Spring Security flow. The client obtains a JWT and sends it with API requests. The gateway validates the token before routing the request. The team still needs to select the token issuer.</p>
+    <div class="diagram" data-page="5">
+        <img class="fallback" src="img/6-keycloak.png" alt="How JWT security works">
+    </div>
+    <div class="tools">
+        <a href="img/6-keycloak.png" target="_blank">PNG image</a>
+        <a href="microservices.drawio" download>Download the draw.io file</a>
+    </div>
+    <p class="help">Diagram toolbar: zoom, change page, full screen. The pencil opens an editable copy in
+    diagrams.net. Without an Internet connection, the PNG image is shown instead.</p>
+
+    <h2>The eight steps</h2>
+    <div class="two-columns">
+        <div class="block"><h3>Getting and using the token</h3><div><ul>
+            <li>The user signs in through the configured token issuer.</li>
+            <li>The React app receives an access token and sends <code>Authorization: Bearer &lt;token&gt;</code>.</li>
+            <li>The gateway checks the signature, expiry, issuer and permissions before routing the request.</li>
+            <li>An authorised request reaches the target service and its response returns through the gateway.</li>
+        </ul></div></div>
+        <div class="block green"><h3>Suggested configuration</h3><div><ul>
+            <li>Spring Security resource server at the gateway.</li>
+            <li>The team will choose the issuer, roles and token configuration during integration.</li>
+        </ul></div></div>
+    </div>
+
+    <div class="pagination"><a href="async-communication.html">← Asynchronous communication (RabbitMQ)</a><a href="indexDoc.html">Home →</a></div>
+</main>
+
+<footer>
+    <div>ReVerde project team</div>
+    <div>ReVerde application documentation — AWD module</div>
+    <div>2026–2027</div>
+</footer>
+
+<script src="diagrams.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
