@@ -28,7 +28,7 @@
 <main>
 
     <h1>Microservices architecture</h1>
-    <p class="lead">Overview of the ReVerde platform: six Spring Boot microservices, each with its own PostgreSQL database, behind an API gateway secured with JWT. Services use Eureka for discovery, Spring Cloud Config for configuration, and RabbitMQ for asynchronous events. Docker Compose is the proposed deployment setup.</p>
+    <p class="lead">Overview of the ReVerde platform: six Spring Boot microservices, each with its own PostgreSQL database, behind an API gateway that validates JWTs issued by Keycloak. Services use Eureka for discovery, Spring Cloud Config backed by a GitHub configuration repository, and RabbitMQ for asynchronous events. Docker Compose is the proposed deployment setup.</p>
     <div class="diagram" data-page="0">
         <img class="fallback" src="img/1-architecture-microservices.png" alt="Microservices architecture">
     </div>
@@ -52,7 +52,9 @@
         <tr><td><b>MS6 · resource-service</b></td><td>Spring Boot</td><td>TBD</td><td><code>RESOURCE-SERVICE</code></td><td>PostgreSQL (resource_db)</td><td>Equipment, categories and allocations</td></tr>
         <tr><td>API Gateway</td><td>Spring Cloud Gateway</td><td>TBD</td><td><code>API-GATEWAY</code></td><td>–</td><td>JWT validation and routing</td></tr>
         <tr><td>Eureka Server</td><td>Spring Cloud Netflix</td><td>TBD</td><td>–</td><td>–</td><td>Service registration and discovery</td></tr>
-        <tr><td>Config Server</td><td>Spring Cloud Config</td><td>TBD</td><td>–</td><td>–</td><td>Centralised service configuration</td></tr>
+        <tr><td>Config Server</td><td>Spring Cloud Config</td><td>TBD</td><td>–</td><td>–</td><td>Centralised service configuration read from the GitHub config repository</td></tr>
+        <tr><td>Keycloak</td><td>OpenID Connect</td><td>8180 (example)</td><td>–</td><td>–</td><td>Identity provider for the <code>reverde</code> realm. Issues JWTs for the client.</td></tr>
+        <tr><td>config-repo</td><td>Git (GitHub)</td><td>–</td><td>–</td><td>–</td><td>Stores configuration read by Spring Cloud Config.</td></tr>
         <tr><td>RabbitMQ</td><td>RabbitMQ</td><td>TBD</td><td>–</td><td>–</td><td>Asynchronous domain events</td></tr>
         </tbody>
     </table>
