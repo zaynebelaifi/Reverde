@@ -28,7 +28,7 @@
 <main>
 
     <h1>Asynchronous communication (RabbitMQ)</h1>
-    <p class="lead">Proposed RabbitMQ flow after an incident is verified. The incident service publishes an event for the recovery service to use in planning.</p>
+    <p class="lead">Proposed RabbitMQ flow after an incident is verified. The incident service publishes an event for recovery planning and optional biodiversity follow-up.</p>
     <div class="diagram" data-page="4">
         <img class="fallback" src="img/5-communication-asynchrone.png" alt="Asynchronous communication (RabbitMQ)">
     </div>
@@ -57,7 +57,7 @@
             <li>A consumer should tolerate repeat delivery.</li>
             <li>The recovery service still owns recovery project creation.</li>
         </ul></div></div>
-        <div class="block"><h3>Running RabbitMQ</h3><div>Include RabbitMQ in the proposed Docker Compose setup. The team will agree on exchange, queue and routing names during integration.</div></div>
+        <div class="block"><h3>Running RabbitMQ</h3><div>Include RabbitMQ in the proposed Docker Compose setup. The diagram shows proposed exchange and queue names, plus a dead-letter path for rejected recovery messages.</div></div>
     </div>
 
     <div class="pagination"><a href="communication-synchrone.html">← Synchronous communication (REST)</a><a href="keycloak-principe.html">How JWT security works →</a></div>

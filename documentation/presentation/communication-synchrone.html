@@ -41,11 +41,11 @@
 
     <h2>The steps</h2>
     <div class="two-columns">
-        <div class="block"><h3>Synchronous path (1 → 8)</h3><div><ul>
+        <div class="block"><h3>Synchronous path (1 → 11)</h3><div><ul>
             <li>The React client sends <code>POST /api/incidents</code> with a bearer JWT and <code>forestZoneId</code>.</li>
             <li>The gateway validates the JWT and routes the request.</li>
             <li>The incident service checks the forest zone through the forest service API.</li>
-            <li>After the lookup succeeds, the incident service saves the incident with <code>REPORTED</code> status and returns <code>201 Created</code>.</li>
+            <li>The service can fetch optional risk context. It then saves the incident with <code>REPORTED</code> status and returns <code>201 Created</code>. The diagram also shows a proposed <code>IncidentReported</code> publication.</li>
         </ul></div></div>
         <div class="block red"><h3>Error cases</h3><div><ul>
             <li><code>401</code> or <code>403</code> when the token or permissions fail validation.</li>
