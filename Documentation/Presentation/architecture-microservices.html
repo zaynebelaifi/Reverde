@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Overall microservices architecture | ReVerde</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header><div class="wrap">
+    <a class="brand" href="index.html">ReVerde</a>
+    <nav aria-label="Documentation">
+      <a href="index.html">Overview</a>
+      <a href="architecture-microservices.html" aria-current="page">Architecture</a>
+      <a href="diagramme-classe.html">Class diagram</a>
+      <a href="diagramme-classe-domaine.html">Classes by service</a>
+    </nav>
+  </div></header>
+  <main class="wrap">
+    <div class="kicker">AWD Final Project · Session 4</div>
+    <h1>Overall microservices architecture</h1>
+    <p class="lead">Follow a request from the React web app through the gateway to one of ReVerde’s six Spring Boot services. The diagram also shows how the services discover each other, load configuration, and exchange events.</p>
+    <figure>
+      <a href="../Diagrams/1-architecture-microservices.png"><img src="../Diagrams/1-architecture-microservices.png" alt="Overall microservices architecture for ReVerde. The reading notes below explain the key relationships."></a>
+      <figcaption><a href="../Diagrams/1-architecture-microservices.png">Open full-size PNG</a> · <a href="../Diagrams/reverde.drawio" download>Download editable Draw.io file</a></figcaption>
+    </figure>
+    <section class="notes">
+      <h2>Reading the diagram</h2>
+      <ul>
+        <li><strong>Request path.</strong> The React app sends REST requests through Spring Cloud Gateway. The gateway validates bearer JWTs and routes requests to the appropriate service.</li>
+        <li><strong>Data ownership.</strong> Each service manages a private PostgreSQL database. Services can use APIs to look up data owned by another module.</li>
+        <li><strong>Shared infrastructure.</strong> Eureka provides service discovery. Spring Cloud Config supplies shared configuration, and RabbitMQ carries asynchronous domain events.</li>
+        <li><strong>Local deployment.</strong> Docker Compose is the proposed way to run the system for development and the demo.</li>
+      </ul>
+    </section>
+  </main>
+  <footer><div class="wrap">ReVerde · Forest protection and recovery in Tunisia</div></footer>
+</body>
+</html>

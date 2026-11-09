@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UML class diagram by service | ReVerde</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header><div class="wrap">
+    <a class="brand" href="index.html">ReVerde</a>
+    <nav aria-label="Documentation">
+      <a href="index.html">Overview</a>
+      <a href="architecture-microservices.html">Architecture</a>
+      <a href="diagramme-classe.html">Class diagram</a>
+      <a href="diagramme-classe-domaine.html" aria-current="page">Classes by service</a>
+    </nav>
+  </div></header>
+  <main class="wrap">
+    <div class="kicker">AWD Final Project · Session 4</div>
+    <h1>UML class diagram by service</h1>
+    <p class="lead">This view groups the classes by service ownership and shows sample fields. The dashed arrows show proposed references between services.</p>
+    <figure>
+      <a href="../Diagrams/3-diagramme-classe-domaine.png"><img src="../Diagrams/3-diagramme-classe-domaine.png" alt="UML class diagram by service for ReVerde. The reading notes below explain the key relationships."></a>
+      <figcaption><a href="../Diagrams/3-diagramme-classe-domaine.png">Open full-size PNG</a> · <a href="../Diagrams/reverde.drawio" download>Download editable Draw.io file</a></figcaption>
+    </figure>
+    <section class="notes">
+      <h2>Reading the diagram</h2>
+      <ul>
+        <li><strong>Forest and risk.</strong> The forest service owns <code>ForestZone</code>. The risk service can store <code>forestZoneId</code> on weather records.</li>
+        <li><strong>Incidents and recovery.</strong> The incident service owns <code>FireIncident</code> and <code>DamageAssessment</code>. The recovery service can use <code>incidentId</code> to link a project to a reported fire.</li>
+        <li><strong>Volunteers and equipment.</strong> Volunteer activities and resource allocations can reference a recovery project by ID.</li>
+        <li><strong>Service boundaries.</strong> Cross-service IDs refer to records managed by another service. Each service owns and maintains its local database relationships.</li>
+      </ul>
+    </section>
+  </main>
+  <footer><div class="wrap">ReVerde · Forest protection and recovery in Tunisia</div></footer>
+</body>
+</html>
