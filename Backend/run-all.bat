@@ -1,0 +1,12 @@
+@echo off
+set "JAVA_HOME=C:\Program Files\Eclipse Adoptium\jdk-17.0.18.8-hotspot"
+set "MAVEN_HOME=C:\ProgramData\chocolatey\lib\maven\apache-maven-3.9.12"
+set "PATH=%JAVA_HOME%\bin;%MAVEN_HOME%\bin;%PATH%"
+set "BACKEND=%~dp0"
+start "forest-biodiversity-service" /D "%BACKEND%forest-biodiversity-service" cmd /k "mvnw.cmd spring-boot:run"
+start "fire-risk-service" /D "%BACKEND%fire-risk-service" cmd /k "mvnw.cmd spring-boot:run"
+start "incident-service" /D "%BACKEND%incident-service" cmd /k "mvnw.cmd spring-boot:run"
+start "recovery-service" /D "%BACKEND%recovery-service" cmd /k "mvnw.cmd spring-boot:run"
+start "volunteer-service" /D "%BACKEND%volunteer-service" cmd /k "mvnw.cmd spring-boot:run"
+start "resource-service" /D "%BACKEND%resource-service" cmd /k "mvnw.cmd spring-boot:run"
+start "analytics-service" /D "%BACKEND%analytics-service" cmd /k ".venv\Scripts\python.exe -m uvicorn main:app --port 8090 --reload"

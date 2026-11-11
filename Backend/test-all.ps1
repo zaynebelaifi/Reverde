@@ -1,0 +1,4 @@
+$services=@(@{Name='forest-biodiversity-service';Port=8081},@{Name='fire-risk-service';Port=8082},@{Name='incident-service';Port=8083},@{Name='recovery-service';Port=8084},@{Name='volunteer-service';Port=8085},@{Name='resource-service';Port=8086},@{Name='analytics-service';Port=8090})
+$results=foreach($s in $services){$ready=$false;$x=$null;for($attempt=0;$attempt -lt 60 -and -not $ready;$attempt++){try{$x=Invoke-RestMethod "http://localhost:$($s.Port)/hello" -TimeoutSec 2;$ready=$x.service -eq $s.Name -and $x.status -eq 'UP' -and [int]$x.port -eq $s.Port}catch{};if(-not $ready){Start-Sleep 1}};if($ready){[pscustomobject]@{Service=$s.Name;Port=$s.Port;Status='PASS';Details=($x|ConvertTo-Json -Compress)}}else{[pscustomobject]@{Service=$s.Name;Port=$s.Port;Status='FAIL';Details='Service unavailable or returned an unexpected response'}}}
+$results|Format-Table -AutoSize
+if(@($results|Where-Object{$_.Status -eq 'FAIL'}).Count -gt 0){exit 1}
