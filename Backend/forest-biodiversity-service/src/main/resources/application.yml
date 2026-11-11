@@ -1,0 +1,13 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: forest-biodiversity-service
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
