@@ -8,6 +8,23 @@ management:
     web:
       exposure:
         include: health,info
+  info:
+    env:
+      enabled: true
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
+info:
+  app:
+    name: forest-biodiversity-service
+    description: Forest biodiversity microservice
+    owner: Omar
+  message: This is the Reverde forest biodiversity microservice
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: false
