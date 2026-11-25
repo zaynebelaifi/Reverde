@@ -1,0 +1,80 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Reverde | Forest & Biodiversity",
+    "description": "Forest zones, species, and biodiversity observations.\n\nCurrent implementation: service connectivity only. Domain CRUD, persistence, and authentication are planned and are not exposed by this API yet. Use the centralized gateway Swagger UI to call this service through discovery and load balancing.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "description": "Public gateway route",
+      "url": "/forests"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Service connectivity",
+      "description": "Confirm gateway routing and identify the responding instance."
+    }
+  ],
+  "paths": {
+    "/hello": {
+      "get": {
+        "tags": [
+          "Service connectivity"
+        ],
+        "summary": "Identify a running Forest & Biodiversity instance",
+        "description": "Returns this instance's identity, actual listening port, and current UTC time. Repeated gateway requests may reach different instances. This endpoint does not return business records.",
+        "operationId": "hello",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceIdentity"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ServiceIdentity": {
+        "type": "object",
+        "properties": {
+          "service": {
+            "type": "string",
+            "example": "forest-biodiversity-service"
+          },
+          "status": {
+            "type": "string",
+            "example": "UP",
+            "enum": [
+              "UP"
+            ]
+          },
+          "message": {
+            "type": "string",
+            "example": "Hello from forest-biodiversity-service"
+          },
+          "port": {
+            "type": "integer",
+            "description": "Actual instance port; changes when scaling locally.",
+            "format": "int32",
+            "example": 8081
+          },
+          "timestamp": {
+            "type": "string",
+            "description": "Response creation time in UTC",
+            "format": "date-time"
+          }
+        },
+        "description": "Identity of the instance that answered the request."
+      }
+    }
+  }
+}

@@ -1,38 +1,106 @@
 server:
-  port: 8080
-
+  port: ${GATEWAY_PORT:8080}
 spring:
   application:
     name: api-gateway
   cloud:
+    loadbalancer:
+      cache:
+        enabled: false
     gateway:
+      httpclient:
+        connect-timeout: 3000
+        response-timeout: 10s
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials RETAIN_FIRST
+        - RemoveRequestHeader=Origin
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: ${CLIENT_ORIGINS:http://localhost:4200,http://localhost:8100,http://localhost,https://localhost,capacitor://localhost}
+            allowedMethods: [GET, POST, PUT, PATCH, DELETE, OPTIONS]
+            allowedHeaders: [Content-Type, Authorization, Accept, X-Request-Id]
+            exposedHeaders: [X-Request-Id]
+            maxAge: 3600
       routes:
+        - id: forest-biodiversity-service
+          uri: lb://FOREST-BIODIVERSITY-SERVICE
+          predicates:
+            - Path=/forests/**
+          filters:
+            - StripPrefix=1
+        - id: fire-risk-service
+          uri: lb://FIRE-RISK-SERVICE
+          predicates:
+            - Path=/fire-risk/**
+          filters:
+            - StripPrefix=1
         - id: incident-service
           uri: lb://INCIDENT-SERVICE
           predicates:
             - Path=/incidents/**
           filters:
             - StripPrefix=1
+        - id: recovery-service
+          uri: lb://RECOVERY-SERVICE
+          predicates:
+            - Path=/recovery/**
+          filters:
+            - StripPrefix=1
+        - id: volunteer-service
+          uri: lb://VOLUNTEER-SERVICE
+          predicates:
+            - Path=/volunteers/**
+          filters:
+            - StripPrefix=1
+        - id: resource-service
+          uri: lb://RESOURCE-SERVICE
+          predicates:
+            - Path=/resources/**
+          filters:
+            - StripPrefix=1
+        - id: analytics-service
+          uri: lb://ANALYTICS-SERVICE
+          predicates:
+            - Path=/analytics/**
+          filters:
+            - StripPrefix=1
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
     register-with-eureka: true
     fetch-registry: true
   instance:
-    prefer-ip-address: true
-
+    hostname: ${SERVICE_HOST:localhost}
+    prefer-ip-address: false
+    instance-id: ${eureka.instance.hostname}:${spring.application.name}:${server.port}
 management:
   endpoints:
     web:
       exposure:
-        include: health,info
-
+        include: health,info,metrics
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
     disable-swagger-default-url: true
+    display-request-duration: true
+    operations-sorter: method
+    tags-sorter: alpha
     urls:
-      - name: Incident Service
+      - name: "Forest & Biodiversity"
+        url: /forests/v3/api-docs
+      - name: "Fire Risk & Weather"
+        url: /fire-risk/v3/api-docs
+      - name: "Fire Incidents"
         url: /incidents/v3/api-docs
+      - name: "Recovery & Reforestation"
+        url: /recovery/v3/api-docs
+      - name: "Volunteer Coordination"
+        url: /volunteers/v3/api-docs
+      - name: "Equipment & Resources"
+        url: /resources/v3/api-docs
+      - name: "Analytics"
+        url: /analytics/openapi.json

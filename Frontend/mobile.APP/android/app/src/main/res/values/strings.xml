@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Reverde</string>
+    <string name="title_activity_main">Reverde</string>
+    <string name="package_name">tn.reverde.field</string>
+    <string name="custom_url_scheme">tn.reverde.field</string>
+</resources>

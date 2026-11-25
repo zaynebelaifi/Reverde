@@ -1,0 +1,46 @@
+{
+  "/forests/**": {
+    "target": "http://localhost:8080",
+    "secure": false
+  },
+  "/fire-risk/**": {
+    "target": "http://localhost:8080",
+    "secure": false
+  },
+  "/incidents/**": {
+    "target": "http://localhost:8080",
+    "secure": false
+  },
+  "/recovery/**": {
+    "target": "http://localhost:8080",
+    "secure": false
+  },
+  "/volunteers/**": {
+    "target": "http://localhost:8080",
+    "secure": false
+  },
+  "/resources/**": {
+    "target": "http://localhost:8080",
+    "secure": false
+  },
+  "/analytics/**": {
+    "target": "http://localhost:8080",
+    "secure": false
+  },
+  "/swagger-ui.html/**": {
+    "target": "http://localhost:8080",
+    "secure": false
+  },
+  "/webjars/**": {
+    "target": "http://localhost:8080",
+    "secure": false
+  },
+  "/v3/**": {
+    "target": "http://localhost:8080",
+    "secure": false
+  },
+  "/swagger-ui.html": {
+    "target": "http://localhost:8080",
+    "secure": false
+  }
+}

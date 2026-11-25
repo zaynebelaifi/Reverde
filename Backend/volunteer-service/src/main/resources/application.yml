@@ -1,13 +1,33 @@
 server:
-  port: 8085
+  port: ${SERVER_PORT:8085}
+  forward-headers-strategy: framework
 spring:
   application:
     name: volunteer-service
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
+    register-with-eureka: true
+    fetch-registry: true
+    healthcheck:
+      enabled: true
+  instance:
+    hostname: ${SERVICE_HOST:localhost}
+    prefer-ip-address: false
+    instance-id: ${eureka.instance.hostname}:${spring.application.name}:${server.port}
 management:
   endpoints:
     web:
       exposure:
-        include: health,info
+        include: health,info,metrics
+  info:
+    env:
+      enabled: true
+info:
+  app:
+    name: volunteer-service
+    description: Volunteer profiles, activities, and registrations.
 springdoc:
   swagger-ui:
     path: /swagger-ui.html

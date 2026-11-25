@@ -1,0 +1,133 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Reverde | Analytics",
+    "description": "Polyglot analytics service. Currently exposes connectivity and process health only. Business analytics and persistence are planned. Use gateway Swagger for unified access.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/hello": {
+      "get": {
+        "tags": [
+          "Service connectivity"
+        ],
+        "summary": "Identify a running analytics instance",
+        "description": "Confirms routing and identifies which instance answered. Does not return domain analytics.",
+        "operationId": "hello_hello_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServiceIdentity"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "tags": [
+          "Service connectivity"
+        ],
+        "summary": "Check process health",
+        "operationId": "health_health_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Health"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Health": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "examples": [
+              "UP"
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "title": "Health"
+      },
+      "ServiceIdentity": {
+        "properties": {
+          "service": {
+            "type": "string",
+            "title": "Service",
+            "examples": [
+              "analytics-service"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "title": "Status",
+            "examples": [
+              "UP"
+            ]
+          },
+          "message": {
+            "type": "string",
+            "title": "Message",
+            "examples": [
+              "Hello from analytics-service"
+            ]
+          },
+          "port": {
+            "type": "integer",
+            "title": "Port",
+            "description": "Actual listening port",
+            "examples": [
+              8090
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Timestamp",
+            "description": "Response creation time in UTC"
+          }
+        },
+        "type": "object",
+        "required": [
+          "service",
+          "status",
+          "message",
+          "port",
+          "timestamp"
+        ],
+        "title": "ServiceIdentity"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Service connectivity",
+      "description": "Instance identity and process health."
+    }
+  ],
+  "servers": [
+    {
+      "description": "Public gateway route",
+      "url": "/analytics"
+    }
+  ]
+}

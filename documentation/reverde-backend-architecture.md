@@ -1,3 +1,5 @@
+> Historical skeleton report. See [the current integration guide](gateway-and-clients.md) for gateway, discovery, Swagger, and Angular clients.
+
 # Reverde Backend Architecture Report
 
 ## 1. Scope

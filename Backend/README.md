@@ -1,11 +1,17 @@
-# Reverde Backend
+# Reverde backend
 
-Eight standalone Spring infrastructure/business services plus the FastAPI analytics service: six Spring Boot business services, one Eureka registry, and one FastAPI analytics service. Each business/service endpoint is available independently. Databases, security, messaging, gateway, and remaining discovery integration are deferred.
+Six Spring Boot business services, FastAPI analytics, Eureka, and a shared API Gateway.
+Set JAVA_HOME to an installed JDK 17+; analytics requires Python 3.10+.
 
-Services: forest-biodiversity-service (Omar, 8081), fire-risk-service (Emna, 8082), incident-service (Ela, 8083), recovery-service (Zayneb, 8084), volunteer-service (Chebbi, 8085), resource-service (Ahmed, 8086), analytics-service (8090).
+```powershell
+./run-all.bat -InstallPython
+./test-all.ps1
+./stop-all.bat
+```
 
-The forest-biodiversity-service is registered with the Eureka server (8761) under the name `FOREST-BIODIVERSITY-SERVICE`. Eureka is available at http://localhost:8761/.
+Swagger: http://localhost:8080/swagger-ui.html. Eureka: http://localhost:8761.
+The launcher refuses occupied ports and records owned processes/logs under ignored `.runtime/`.
+Stop IDE instances through IntelliJ. All seven services register with Eureka.
+Domain persistence, authentication, messaging, and Config Server remain planned.
 
-Prerequisites: Java 17+, Maven 3.9+ or included wrappers, Python 3.10+, and Git. Run all with run-all.bat, test with powershell -ExecutionPolicy Bypass -File .\test-all.ps1, and stop with stop-all.bat. Use stop-all.bat for occupied ports, mvnw.cmd if mvn is unavailable, and set JAVA_HOME to JDK 17 if Java is not found.
-
-Next: API Gateway, PostgreSQL per service, RabbitMQ, Eureka, Config Server, and Docker Compose.
+See [the integration guide](../documentation/gateway-and-clients.md).

@@ -1,0 +1,10 @@
+{
+  "name": "reverde-mobile",
+  "private": true,
+  "version": "1.0.0",
+  "dependencies": {
+    "@capacitor/core": "8.6.2",
+    "@capacitor/android": "8.6.2",
+    "@capacitor/ios": "8.6.2"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "name": "reverde-clients",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "ng serve web.APP --host localhost --port 4200",
+    "start:mobile": "ng serve mobile.APP --host localhost --port 8100",
+    "build": "ng build web.APP && ng build mobile.APP",
+    "build:web": "ng build web.APP",
+    "build:mobile": "ng build mobile.APP",
+    "test": "node --test tests/*.test.mjs",
+    "mobile:sync": "npm run build:mobile && cd mobile.APP && npx cap sync",
+    "mobile:android": "cd mobile.APP && npx cap open android"
+  },
+  "dependencies": {
+    "@angular/common": "22.3.0",
+    "@angular/compiler": "22.3.0",
+    "@angular/core": "22.3.0",
+    "@angular/forms": "22.3.0",
+    "@angular/platform-browser": "22.3.0",
+    "@angular/router": "22.3.0",
+    "@ionic/angular": "9.0.13",
+    "@capacitor/core": "8.6.2",
+    "@capacitor/android": "8.6.2",
+    "@capacitor/ios": "8.6.2",
+    "ionicons": "8.0.13",
+    "rxjs": "7.8.2",
+    "zone.js": "0.16.0",
+    "tslib": "2.8.1"
+  },
+  "devDependencies": {
+    "@angular/build": "22.3.0",
+    "@angular/cli": "22.3.0",
+    "@angular/compiler-cli": "22.3.0",
+    "@capacitor/cli": "8.6.2",
+    "typescript": "~6.0.0"
+  }
+}

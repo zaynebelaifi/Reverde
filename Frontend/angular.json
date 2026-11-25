@@ -1,0 +1,125 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "cli": {
+    "analytics": false
+  },
+  "projects": {
+    "web.APP": {
+      "projectType": "application",
+      "root": "web.APP",
+      "sourceRoot": "web.APP/src",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "web.APP/src/main.ts",
+            "index": "web.APP/src/index.html",
+            "tsConfig": "web.APP/tsconfig.app.json",
+            "outputPath": "dist/web.APP",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "web.APP/public",
+                "output": "/"
+              }
+            ],
+            "styles": [
+              "web.APP/src/styles.css"
+            ],
+            "polyfills": [
+              "zone.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "all",
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "3mb"
+                }
+              ]
+            },
+            "development": {
+              "optimization": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "options": {
+            "proxyConfig": "proxy.conf.json"
+          },
+          "configurations": {
+            "development": {
+              "buildTarget": "web.APP:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        }
+      }
+    },
+    "mobile.APP": {
+      "projectType": "application",
+      "root": "mobile.APP",
+      "sourceRoot": "mobile.APP/src",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "mobile.APP/src/main.ts",
+            "index": "mobile.APP/src/index.html",
+            "tsConfig": "mobile.APP/tsconfig.app.json",
+            "outputPath": "dist/mobile.APP",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "mobile.APP/public",
+                "output": "/"
+              }
+            ],
+            "styles": [
+              "mobile.APP/src/styles.css"
+            ],
+            "polyfills": [
+              "zone.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "all",
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "3mb"
+                }
+              ]
+            },
+            "development": {
+              "optimization": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "options": {
+            "proxyConfig": "proxy.conf.json"
+          },
+          "configurations": {
+            "development": {
+              "buildTarget": "mobile.APP:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        }
+      }
+    }
+  }
+}

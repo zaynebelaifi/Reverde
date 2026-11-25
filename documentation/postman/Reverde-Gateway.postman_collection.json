@@ -1,0 +1,161 @@
+{
+  "info": {
+    "name": "Reverde | Gateway APIs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "gateway",
+      "value": "http://localhost:8080"
+    }
+  ],
+  "item": [
+    {
+      "name": "forest-biodiversity-service",
+      "request": {
+        "method": "GET",
+        "url": "{{gateway}}/forests/hello"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Gateway returned the correct service\", function () {",
+              "  pm.response.to.have.status(200);",
+              "  pm.expect(pm.response.json().service).to.eql(\"forest-biodiversity-service\");",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "fire-risk-service",
+      "request": {
+        "method": "GET",
+        "url": "{{gateway}}/fire-risk/hello"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Gateway returned the correct service\", function () {",
+              "  pm.response.to.have.status(200);",
+              "  pm.expect(pm.response.json().service).to.eql(\"fire-risk-service\");",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "incident-service",
+      "request": {
+        "method": "GET",
+        "url": "{{gateway}}/incidents/hello"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Gateway returned the correct service\", function () {",
+              "  pm.response.to.have.status(200);",
+              "  pm.expect(pm.response.json().service).to.eql(\"incident-service\");",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "recovery-service",
+      "request": {
+        "method": "GET",
+        "url": "{{gateway}}/recovery/hello"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Gateway returned the correct service\", function () {",
+              "  pm.response.to.have.status(200);",
+              "  pm.expect(pm.response.json().service).to.eql(\"recovery-service\");",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "volunteer-service",
+      "request": {
+        "method": "GET",
+        "url": "{{gateway}}/volunteers/hello"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Gateway returned the correct service\", function () {",
+              "  pm.response.to.have.status(200);",
+              "  pm.expect(pm.response.json().service).to.eql(\"volunteer-service\");",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "resource-service",
+      "request": {
+        "method": "GET",
+        "url": "{{gateway}}/resources/hello"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Gateway returned the correct service\", function () {",
+              "  pm.response.to.have.status(200);",
+              "  pm.expect(pm.response.json().service).to.eql(\"resource-service\");",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "analytics-service",
+      "request": {
+        "method": "GET",
+        "url": "{{gateway}}/analytics/hello"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Gateway returned the correct service\", function () {",
+              "  pm.response.to.have.status(200);",
+              "  pm.expect(pm.response.json().service).to.eql(\"analytics-service\");",
+              "});"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

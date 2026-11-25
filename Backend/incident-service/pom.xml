@@ -1,9 +1,11 @@
-<project xmlns='http://maven.apache.org/POM/4.0.0'>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
     <modelVersion>4.0.0</modelVersion>
-    <parent><groupId>org.springframework.boot</groupId>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.3.5</version>
-        <relativePath/></parent>
+        <relativePath />
+    </parent>
     <groupId>com.reverde</groupId>
     <artifactId>incident-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
