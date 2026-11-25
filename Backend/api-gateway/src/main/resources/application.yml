@@ -7,6 +7,12 @@ spring:
   cloud:
     gateway:
       routes:
+        - id: forest-biodiversity-service
+          uri: lb://FOREST-BIODIVERSITY-SERVICE
+          predicates:
+            - Path=/forest-biodiversity/**
+          filters:
+            - StripPrefix=1
         - id: incident-service
           uri: lb://INCIDENT-SERVICE
           predicates:
@@ -40,6 +46,8 @@ springdoc:
     path: /swagger-ui.html
     disable-swagger-default-url: true
     urls:
+      - name: Forest Biodiversity Service
+        url: /forest-biodiversity/v3/api-docs
       - name: Incident Service
         url: /incidents/v3/api-docs
       - name: Fire Risk Service
