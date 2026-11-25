@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8087
 
 spring:
   application:
@@ -7,10 +7,22 @@ spring:
   cloud:
     gateway:
       routes:
+        - id: forest-biodiversity-service
+          uri: lb://FOREST-BIODIVERSITY-SERVICE
+          predicates:
+            - Path=/forest-biodiversity/**
+          filters:
+            - StripPrefix=1
         - id: incident-service
           uri: lb://INCIDENT-SERVICE
           predicates:
             - Path=/incidents/**
+          filters:
+            - StripPrefix=1
+        - id: fire-risk-service
+          uri: lb://FIRE-RISK-SERVICE
+          predicates:
+            - Path=/fire-risk/**
           filters:
             - StripPrefix=1
 
@@ -34,5 +46,9 @@ springdoc:
     path: /swagger-ui.html
     disable-swagger-default-url: true
     urls:
+      - name: Forest Biodiversity Service
+        url: /forest-biodiversity/v3/api-docs
       - name: Incident Service
         url: /incidents/v3/api-docs
+      - name: Fire Risk Service
+        url: /fire-risk/v3/api-docs
